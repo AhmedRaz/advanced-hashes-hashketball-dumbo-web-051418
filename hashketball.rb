@@ -195,4 +195,18 @@ end
 
 #Bonus rounds 
 
+def most_points_scored
+  max_points = nil
+  max_point_player = nil
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_name, stats|
+      if max_points == nil || max_points < stats[:points]
+        max_points = stats[:points]
+        max_point_player = player_name
+      end
+    end
+  end
+  return "#{max_point_player} is the highest scorer with #{max_points} points."
+end
+
 
