@@ -209,4 +209,24 @@ def most_points_scored
   return "#{max_point_player} is the highest scorer with #{max_points} points."
 end
 
+def winning_team
+  team_results = {}
+  game_hash.each do |location, team_data|
+    total_points = 0
+    team_data[:players].each_value {|stats| total_points += stats[:points]}
+    team_results[team_data[:team_name]] = total_points
+  end
+  most_points = nil
+  winning_team = nil
+  team_results.each do |team, score|
+    if most_points == nil || most_points < score
+      most_points = score
+      winning_team = team
+    end
+  end
+  puts "Scoreboard:"
+  team_results.each {|team, score| puts "  #{team}: #{score}"}
+  return "#{winning_team} won with #{most_points} points."
+end
+
 
