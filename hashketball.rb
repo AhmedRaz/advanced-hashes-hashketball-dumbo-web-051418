@@ -229,4 +229,37 @@ def winning_team
   return "#{winning_team} won with #{most_points} points."
 end
 
+def player_with_longest_name
+  player_name_lengths =  {}
+  game_hash.each do |location, team_data|
+    team_data[:players].each_key {|name| player_name_lengths[name] = name.length}
+  end
+  longest_name = nil
+  length = nil
+  player_name_lengths.each do |player, name_length|
+    if length == nil || length < name_length
+      length = name_length
+      longest_name = player
+    end
+  end
+  return longest_name
+end
+
+def player_with_most_steals
+  max_steals = nil
+  max_steals_player = nil
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_name, stats|
+      if max_steals == nil || max_steals < stats[:steals]
+        max_steals = stats[:steals]
+        max_steals_player = player_name
+      end
+    end
+  end
+  return max_steals_player
+end
+
+def long_name_steals_a_ton?
+  player_with_longest_name == player_with_most_steals
+end
 
