@@ -167,3 +167,13 @@ def player_numbers(team_name)
   return jersey
 end
 
+def player_stats(player_name)
+  player_hash = nil
+  game_hash.each do |location, team_data|
+    if team_data[:players].keys.include?(player_name)
+      return  player_hash = team_data[:players][player_name]
+    end
+  end
+  return "#{player_name} is not on either team." if player_hash == nil
+end
+
