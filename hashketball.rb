@@ -156,11 +156,13 @@ def team_names
 end
 
 def player_numbers(team_name)
+  jersey = nil
   game_hash.collect do |location, team_data|
     if team_data[:team_name] == team_name
-      team_data[:players].collect do |players, stats|
+     jersey =  team_data[:players].collect do |players, stats|
         stats[:number]
       end
     end
   end
+  return jersey
 end
