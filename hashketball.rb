@@ -177,3 +177,18 @@ def player_stats(player_name)
   return "#{player_name} is not on either team." if player_hash == nil
 end
 
+def big_shoe_rebounds
+  max_shoe = nil
+  bigfoot_player = nil
+  rebounds = nil
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_name, stats|
+      if max_shoe == nil || max_shoe < stats[:shoe]
+        max_shoe = stats[:shoe]
+        bigfoot_player = player_name
+        rebounds = stats[:rebounds]
+      end
+    end
+  end
+  rebounds
+end
